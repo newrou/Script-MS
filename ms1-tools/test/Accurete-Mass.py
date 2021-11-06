@@ -56,8 +56,8 @@ for iso in isotopes.getContainer():
     methanol_isoDist["abundance"].append((iso.getIntensity() * 100))
 
 print("Fine Isotope Distribution:")
-#isotopes = ethanol.getIsotopeDistribution( FineIsotopePatternGenerator(1e-3) )
-isotopes = ethanol.getIsotopeDistribution( CoarseIsotopePatternGenerator(4) )
+isotopes = ethanol.getIsotopeDistribution( FineIsotopePatternGenerator(1e-3) )
+#isotopes = ethanol.getIsotopeDistribution( CoarseIsotopePatternGenerator(4) )
 prob_sum = sum([iso.getIntensity() for iso in isotopes.getContainer()])
 print("This covers", prob_sum, "probability")
 for iso in isotopes.getContainer():
@@ -79,4 +79,5 @@ plotDistribution(ethanol_isoDist)
 plt.xlabel("Atomic mass (u)")
 plt.ylabel("Relative abundance (%)")
 
-plt.savefig("methanol_ethanol_isoDistribution.png")
+#plt.savefig("methanol_ethanol_isoDistribution.png")
+plt.savefig("methanol_ethanol_isoDistribution.svg")

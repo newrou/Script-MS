@@ -54,6 +54,7 @@ fprintf($stdout,"<th data-type=number>Quality</th> <th data-type=number>Int.</th
 for($i=0; $i<count($MSLine); $i++) {
     fprintf($stdout,"<tr><td>%ld</td>", $i);
 
+    $MZ=$MSLine[$i]['mz'];
     $MZmin=$MSLine[$i]['mz']*0.999970;
     $MZmax=$MSLine[$i]['mz']*1.000030;
     $RT=($MSLine[$i]['rt_start']+$MSLine[$i]['rt_end'])/2;
@@ -64,9 +65,10 @@ for($i=0; $i<count($MSLine); $i++) {
     $refH='https://metlin.scripps.edu/advanced_search_result.php?molid=&mass_min='.($MZmin-1.0073).'&mass_max='.($MZmax-1.0073).'&name=&formula=&cas=&kegg=&smilefile=&msmspeaks_min=&AminoAcid='.$pep.'&drug='.$drug.'&toxinEPA='.$tox.'&smilesExactMatchCheckBox=false&nameExactMatchCheckBox=false#';
     $refNa='https://metlin.scripps.edu/advanced_search_result.php?molid=&mass_min='.($MZmin-22.9893).'&mass_max='.($MZmax-22.9893).'&name=&formula=&cas=&kegg=&smilefile=&msmspeaks_min=&AminoAcid='.$pep.'&drug='.$drug.'&toxinEPA='.$tox.'&smilesExactMatchCheckBox=false&nameExactMatchCheckBox=false#';
     $refK='https://metlin.scripps.edu/advanced_search_result.php?molid=&mass_min='.($MZmin-38.9632).'&mass_max='.($MZmax-38.9632).'&name=&formula=&cas=&kegg=&smilefile=&msmspeaks_min=&AminoAcid='.$pep.'&drug='.$drug.'&toxinEPA='.$tox.'&smilesExactMatchCheckBox=false&nameExactMatchCheckBox=false#';
+    $refSimple='https://metlin.scripps.edu/simple_search_result.php?mass_mid='.$MZ.'&mass_tol=50&mass_mode=1&AminoAcid=add&toxinEPA=add&keggIDFilter=add&escElementList=&escMinNumElementList=&escMaxNumElementList=&adducts=M%2BH,M%2BNa,M%2BK#';
 // https://metlin.scripps.edu/advanced_search_result.php?molid=&mass_min=240.1&mass_max=240.9&name=&formula=&cas=&kegg=&smilefile=&msmspeaks_min=&AminoAcid=add&drug=add&toxinEPA=add&keggIDFilter=add&escElementList=&escMinNumElementList=&escMaxNumElementList=&smilesExactMatchCheckBox=false&nameExactMatchCheckBox=false
 
-    fprintf($stdout,"<td>%.4f</td> <td> <a href=\"%s\">[M]<sup>+</sup></a> <a href=\"%s\">[M+H]<sup>+</sup></a> <a href=\"%s\">[M+Na]<sup>+</sup></a> <a href=\"%s\">[M+K]<sup>+</sup></a> </td>", $MSLine[$i]['mz'], $ref, $refH, $refNa, $refK);
+    fprintf($stdout,"<td>%.4f</td> <td> <a href=\"%s\">[M]<sup>+</sup></a> <a href=\"%s\">[M+H]<sup>+</sup></a> <a href=\"%s\">[M+Na]<sup>+</sup></a> <a href=\"%s\">[M+K]<sup>+</sup></a> <a href=\"%s\">[Simple]</a> </td> ", $MSLine[$i]['mz'], $ref, $refH, $refNa, $refK, $refSimple);
     fprintf($stdout," <td>%.0f</td> <td>%.2f</td> <td>%.0f</td> <td>%.0f</td> <td>%.0f</td> <td>%.0f</td> </tr>\n", $MSLine[$i]['charge'], $MSLine[$i]['quality'], $MSLine[$i]['intensity'], $MSLine[$i]['rt_start'], $MSLine[$i]['rt_end'], $ACN);
 }
 fprintf($stdout,"</table>\n");
